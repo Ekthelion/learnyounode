@@ -1,3 +1,14 @@
-var module_function = require('./program6_module.js');
+var read_directory = require('./program6_module.js');
 
-module_function(1, 2, 4);
+var args = process.argv.slice(2);
+var loc = args[0];
+var filter = args[1];
+
+read_directory(loc, filter, function(err, files) {
+  if (err) {
+    return console.error(err);
+  }
+  files.forEach(function(file) {
+    console.log(file);
+  })
+})
