@@ -1,33 +1,33 @@
-var http = require('http');
+const http = require('http');
 
-var args = process.argv.slice(2);
-var finished = 0;
-var content = [];
+const args = process.argv.slice(2);
+let finished = 0;
+const content = [];
 
-function print_results() {
-  content.forEach(function (elem) {
+function printResults() {
+  content.forEach((elem) => {
     console.log(elem);
   });
 }
 
-function do_request(index) {
+function doRequest(index) {
   http.get(args[index], (res) => {
     res.setEncoding('utf8');
-    let raw_data = '';
+    let rawData = '';
     res.on('data', (chunk) => {
-      raw_data += chunk;
+      rawData += chunk;
     });
     res.on('end', () => {
-      finished++;
-      content[index] = raw_data;
+      finished += 1;
+      content[index] = rawData;
       if (finished === args.length) {
-        print_results();
+        printResults();
       }
     });
     res.on('error', console.error);
-  })
-};
+  });
+}
 
-for (var i = 0; i < args.length; i++) {
-  do_request(i);
+for (let i = 0; i < args.length; i += 1) {
+  doRequest(i);
 }
