@@ -12,8 +12,6 @@ const server = net.createServer((socket) => {
   // socket.on('end', () => {
   //   console.log("(server) Client disconnected...");
   // });
-  socket.end(formatDate(new Date()));
+  socket.end(`${formatDate(new Date())}\n`);
 });
-server.listen(args[1] ? args[1] : 3000, () => {
-  // console.log("(server) Server is listening...");
-});
+server.listen(Number(args[0] ? args[0] : 3000));
