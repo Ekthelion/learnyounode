@@ -13,8 +13,5 @@ http.createServer((req, res) => {
     body += data;
   });
 
-  req.on('end', () => {
-    res.end(body.toString().toUpperCase());
-  });
-  return true;
+  return req.on('end', () => res.end(body.toString().toUpperCase()));
 }).listen(Number(args[0]));
